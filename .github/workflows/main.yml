@@ -1,0 +1,29 @@
+name: Ada CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Cache Ada toolchain
+      uses: actions/cache@v4
+      with:
+        path: ./cached_gnat
+        key: ${{ runner.os }}-gnat-${{ hashFiles('hello.gpr') }}
+
+    - name: Set up Ada toolchain
+      uses: ada-actions/toolchain@dev
+      with:
+        distrib: community
+        install_dir: ./cached_gnat
+
+    - name: Build project
+      run: gprbuild -P hello.gpr
+
+    - name: Run program
+      run: ./obj/hello
