@@ -12,18 +12,24 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+ 
+
+
+
     - name: Cache Ada toolchain
       uses: actions/cache@v4
       with:
-        path: ./cached_gnat
+        path: /home/runner/work/gnat
         key: ${{ runner.os }}-gnat-${{ hashFiles('hello.gpr') }}
 
-    - name: Set up Ada toolchain
-      uses: ada-actions/toolchain@dev
+    - name: Install Ada toolchain
+      uses: ada-actions/toolchain@ce2021
       with:
         distrib: community
-        target: native
-        install_dir: ./cached_gnat
+        install_dir: /home/runner/work/gnat
+
+
+
 
     - name: Create object directory
       run: mkdir -p obj
