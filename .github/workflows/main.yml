@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
@@ -22,6 +22,7 @@ jobs:
       uses: ada-actions/toolchain@dev
       with:
         distrib: community
+        target: native
         install_dir: ./cached_gnat
 
     - name: Create object directory
