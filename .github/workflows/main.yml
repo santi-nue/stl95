@@ -12,30 +12,21 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
- 
-
-
-
-    - name: Cache Ada toolchain
+    - name: Cache Alire toolchain
       uses: actions/cache@v4
       with:
-        path: /home/runner/work/gnat
-        key: ${{ runner.os }}-gnat-${{ hashFiles('hello.gpr') }}
+        path: /home/runner/.config/alire
+        key: ${{ runner.os }}-alire-${{ hashFiles('alire.toml') }}
 
-    - name: Install Ada toolchain
-      uses: ada-actions/toolchain@ce2021
-      with:
-        distrib: community
-        install_dir: /home/runner/work/gnat
+    - name: Install Alire
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/alire-project/alire/master/install.sh | sh -s -- -b ~/.local/bin
 
-
-
-
-    - name: Create object directory
-      run: mkdir -p obj
+    - name: Install dependencies
+      run: ~/.local/bin/alr get
 
     - name: Build project
-      run: gprbuild -P hello.gpr
+      run: ~/.local/bin/alr build
 
     - name: Run program
-      run: ./obj/hello
+      run: ./bin/hello
