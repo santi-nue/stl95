@@ -19,7 +19,7 @@ jobs:
         key: ${{ runner.os }}-gnat-${{ hashFiles('hello.gpr') }}
 
     - name: Install Ada toolchain
-      uses: ada-actions/toolchain@ce2019
+      uses: ada-actions/toolchain@dev
       with:
         distrib: community
         install_dir: /home/runner/work/gnat
