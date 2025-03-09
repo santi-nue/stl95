@@ -24,6 +24,9 @@ jobs:
         distrib: community
         install_dir: ./cached_gnat
 
+    - name: Create object directory
+      run: mkdir -p obj
+
     - name: Build project
       run: gprbuild -P hello.gpr
 
