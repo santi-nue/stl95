@@ -23,8 +23,8 @@ jobs:
         curl -sSfL https://raw.githubusercontent.com/alire-project/alire/master/install.sh | sh -s -- -b ~/.local/bin
         echo "::add-path::${HOME}/.local/bin"
 
-    - name: Install dependencies
-      run: ~/.local/bin/alr get
+#    - name: Install dependencies
+#      run: ~/.local/bin/alr get
 
     - name: Build project
       run: ~/.local/bin/alr build
